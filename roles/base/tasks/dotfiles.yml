@@ -1,0 +1,4 @@
+- name: Clone my dotfiles repository
+  ansible.builtin.git:
+    repo: https://github.com/neftales/dotfiles.git
+    dest: /home/neftales/dev/dotfiles
