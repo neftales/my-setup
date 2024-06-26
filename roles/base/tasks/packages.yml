@@ -14,5 +14,6 @@
       - silversearcher-ag
       - fd-find
       - python3-psutil
+      - xclip
     state: latest
   when: ansible_distribution == "Ubuntu"
