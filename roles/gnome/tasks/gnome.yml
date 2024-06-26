@@ -1,0 +1,56 @@
+- name: Change color-scheme to dark
+  become: false
+  dconf:
+    key: "/org/gnome/desktop/interface/color-scheme"
+    value: "'prefer-dark'"
+    state: present
+
+- name: Change gtk-theme to Yaru-dark
+  become: false
+  dconf:
+    key: "/org/gnome/desktop/interface/gtk-theme"
+    value: "'Yaru-dark'"
+    state: present
+
+- name: Change icon-theme to Yaru
+  become: false
+  dconf:
+    key: "/org/gnome/desktop/interface/icon-theme"
+    value: "'Yaru'"
+    state: present
+
+- name: Change dock-position to bottom
+  become: false
+  dconf:
+    key: "/org/gnome/shell/extensions/dash-to-dock/dock-position"
+    value: "'BOTTOM'"
+    state: present
+
+- name: Change dock-fixed to false
+  become: false
+  dconf:
+    key: "/org/gnome/shell/extensions/dash-to-dock/dock-fixed"
+    value: false
+    state: present
+
+- name: Change dock extend-height to false
+  become: false
+  dconf:
+    key: "/org/gnome/shell/extensions/dash-to-dock/extend-height"
+    value: false
+    state: present
+
+- name: Enable gnome shell extensions
+  become: false
+  dconf:
+    key: "/org/gnome/shell/enabled-extensions"
+    value: ['ding@rastersoft.com', 'ubuntu-dock@ubuntu.com', 'tiling-assistant@ubuntu.com']
+    state: present
+
+- name: Select power-profile performance
+  become: false
+  dconf:
+    key: "/org/gnome/shell/last-selected-power-profile"
+    value: "'performance'"
+    state: present
+
