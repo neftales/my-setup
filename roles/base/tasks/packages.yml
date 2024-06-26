@@ -13,5 +13,6 @@
       - stow
       - silversearcher-ag
       - fd-find
+      - python3-psutil
     state: latest
   when: ansible_distribution == "Ubuntu"
