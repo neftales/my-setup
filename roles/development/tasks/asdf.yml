@@ -1,0 +1,37 @@
+- name: Install asdf
+  become: false
+  ansible.builtin.git:
+    repo: https://github.com/asdf-vm/asdf.git
+    dest: $HOME/.asdf
+    version: v0.14.0 
+
+- name: Install asdf Java plugin
+  become: false
+  ansible.builtin.shell:
+    cmd: "asdf plugin-add java https://github.com/halcyon/asdf-java.git"
+
+- name: Install Java adoptopenjdk 21
+  become: false
+  ansible.builtin.shell:
+    cmd: "asdf install java latest:adoptopenjdk-21"
+
+- name: Configure Java adoptopenjdk 21 as global java instalation
+  become: false
+  ansible.builtin.shell:
+    cmd: "asdf global java latest:adoptopenjdk-21"
+
+- name: Install asdf Go plugin
+  become: false
+  ansible.builtin.shell:
+    cmd: "asdf plugin add golang https://github.com/asdf-community/asdf-golang.git"
+
+- name: Install Golang 1.22
+  become: false
+  ansible.builtin.shell:
+    cmd: "asdf install golang 1.22.4"
+
+- name: Configure Golang 1.22 as global go instalation
+  become: false
+  ansible.builtin.shell:
+    cmd: "asdf global golang 1.22.4"
+
