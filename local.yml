@@ -22,5 +22,5 @@
         cmd: "ansible-galaxy collection install community.general"
   roles:
     - base
-    - gnome
+    - appearance
     - development
