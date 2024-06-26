@@ -3,16 +3,22 @@
   tags: always
   become: true
   pre_tasks:
-    - name: update cache
+    - name: Update Cache (Ubuntu)
       tags: always
       apt:
         update_cache: yes
       changed_when: false
       when: ansible_distribution == "Ubuntu"
-    - name: install updates
+
+    - name: Install Updates (Ubuntu)
       apt:
         upgrade: dist
         update_cache: yes
       when: ansible_distribution == "Ubuntu"
+
+    - name: Install Ansible community.general
+      become_user: neftales
+      ansible.builtin.shell:
+        cmd: "ansible-galaxy collection install community.general"
   roles:
     - base
