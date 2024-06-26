@@ -11,5 +11,7 @@
       - unzip
       - build-essential
       - stow
+      - silversearcher-ag
+      - fd-find
     state: latest
   when: ansible_distribution == "Ubuntu"
