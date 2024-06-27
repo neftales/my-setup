@@ -1,4 +1,6 @@
 - name: Clone my dotfiles repository
+  become_user: neftales
   ansible.builtin.git:
+    key_file: $HOME/.ssh/id_ed25519
     repo: https://github.com/neftales/dotfiles.git
     dest: /home/neftales/dev/dotfiles
