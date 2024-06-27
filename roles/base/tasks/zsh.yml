@@ -1,29 +1,34 @@
 - name: Check if oh-my-zsh directory exists
   become_user: "{{ user }}"
+  tags: zsh
   ansible.builtin.stat:
     path: $HOME/.oh-my-zsh/
   register: ohmyzsh
 
 - name: Check zsh simbolic link exists
   become_user: "{{ user }}"
+  tags: zsh
   ansible.builtin.stat:
     path: $HOME/.zshrc
   register: sym
 
 - name: Check zsh spaceship theme simbolic link exists
   become_user: "{{ user }}"
+  tags: zsh
   ansible.builtin.stat:
     path: $HOME/.oh-my-zsh/themes/spaceship.zsh-theme
   register: theme_sym
 
 - name: Install oh-my-zsh
   become_user: "{{ user }}"
+  tags: zsh
   ansible.builtin.shell:
     cmd: "curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh | bash"
   when: ohmyzsh.stat.isdir is not defined 
 
 - name: Install spaceship theme
   become_user: "{{ user }}"
+  tags: zsh
   ansible.builtin.git:
     repo: https://github.com/spaceship-prompt/spaceship-prompt.git
     dest: /home/neftales/.oh-my-zsh/themes/spaceship-prompt/
@@ -31,6 +36,7 @@
 
 - name: Create a simbolic link to zsh theme
   become_user: "{{ user }}"
+  tags: zsh
   ansible.builtin.file:
     src: /home/neftales/.oh-my-zsh/themes/spaceship-prompt/spaceship.zsh-theme
     dest: /home/neftales/.oh-my-zsh/themes/spaceship.zsh-theme
@@ -41,6 +47,7 @@
 
 - name: Create a simbolic link from dotfiles to zsh
   become_user: "{{ user }}"
+  tags: zsh
   ansible.builtin.shell: 
     cmd: "stow -t $HOME -d $HOME/dev/dotfiles zsh" 
   when: sym.stat.islnk is not defined 
