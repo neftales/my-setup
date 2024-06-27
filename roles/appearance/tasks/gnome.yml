@@ -54,3 +54,10 @@
     value: "'performance'"
     state: present
 
+- name: Set favorite-apps
+  become_user: neftales
+  tags: gnome
+  dconf:
+    key: "/org/gnome/shell/favorite-apps"
+    value: ['firefox_firefox.desktop', 'org.gnome.Nautilus.desktop', 'terminator.desktop']
+    state: present
