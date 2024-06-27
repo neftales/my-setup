@@ -18,5 +18,6 @@
       - python3-psutil
       - xclip
       - terminator
+      - ripgrep
     state: latest
   when: ansible_distribution == "Ubuntu"
