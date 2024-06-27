@@ -1,0 +1,29 @@
+- name: Get Vagrant Key
+  tags: vagrant
+  ansible.builtin.get_url:
+    url: https://apt.releases.hashicorp.com/gpg
+    dest: /tmp/hashicorp-archive-keyring.gpg
+  when: ansible_distribution == "Ubuntu"
+
+- name: Install Vagrant Key
+  become: true
+  tags: vagrant
+  ansible.builtin.shell:
+    cmd: "cat /tmp/hashicorp-archive-keyring.gpg | gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg"
+    creates: /usr/share/keyrings/hashicorp-archive-keyring.gpg
+  when: ansible_distribution == "Ubuntu"
+
+- name: Add repo to source
+  become: true
+  ansible.builtin.apt_repository:
+    repo:  "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com {{ ansible_distribution_release }} main"
+    state: present
+  when: ansible_distribution == "Ubuntu"
+
+- name: Install Vagrant (Ubuntu)
+  tags: vagrant
+  become: true
+  apt:
+    name: vagrant
+    update_cache: yes
+  when: ansible_distribution == "Ubuntu"
