@@ -51,7 +51,6 @@
   ansible.builtin.file:
     paty: $HOME/.zshrc
     state: absent
-  when: sym.stat.islnk is not defined
 
 - name: Create a simbolic link from dotfiles to zsh
   become_user: "{{ user }}"
