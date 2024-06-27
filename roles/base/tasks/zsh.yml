@@ -49,7 +49,7 @@
   become_user: "{{ user }}"
   tags: zsh
   ansible.builtin.file:
-    paty: $HOME/.zshrc
+    path: $HOME/.zshrc
     state: absent
 
 - name: Create a simbolic link from dotfiles to zsh
