@@ -1,11 +1,13 @@
 - name: Check with neovim is already install
   become: true
+  tags: neovim
   ansible.builtin.stat:
     path: /usr/local/bin/nvim
   register: neovim
 
 - name: Clone neovim repository
   become: true
+  tags: neovim
   ansible.builtin.git:
     repo: https://github.com/neovim/neovim.git
     dest: /home/neftales/dev/neovim
@@ -15,6 +17,7 @@
 
 - name: Configure build type for release
   become: true
+  tags: neovim
   make:
     chdir: /home/neftales/dev/neovim
     params:
@@ -23,6 +26,7 @@
 
 - name: Install neovim
   become: true
+  tags: neovim
   make:
     chdir: /home/neftales/dev/neovim
     target: install
@@ -30,6 +34,7 @@
 
 - name: Create a simbolic link from dotfiles to neovim
   become_user: "{{ user }}"
+  tags: neovim
   ansible.builtin.shell:
     cmd: "stow -t $HOME -d $HOME/dev/dotfiles neovim" 
 
