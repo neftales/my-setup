@@ -1,4 +1,5 @@
 - name: install packages
+  tags: packages
   apt:
     name: 
       - git
@@ -15,5 +16,6 @@
       - fd-find
       - python3-psutil
       - xclip
+      - terminator
     state: latest
   when: ansible_distribution == "Ubuntu"
