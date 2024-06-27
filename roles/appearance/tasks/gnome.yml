@@ -1,0 +1,71 @@
+- name: Change color-scheme to dark
+  become_user: "{{ user }}"
+  tags: gnome
+  dconf:
+    key: "/org/gnome/desktop/interface/color-scheme"
+    value: "'prefer-dark'"
+    state: present
+
+- name: Change gtk-theme to Yaru-dark
+  become_user: "{{ user }}"
+  tags: gnome
+  dconf:
+    key: "/org/gnome/desktop/interface/gtk-theme"
+    value: "'Yaru-dark'"
+    state: present
+
+- name: Change icon-theme to Yaru
+  become_user: "{{ user }}"
+  tags: gnome
+  dconf:
+    key: "/org/gnome/desktop/interface/icon-theme"
+    value: "'Yaru'"
+    state: present
+
+- name: Change dock-position to bottom
+  become_user: "{{ user }}"
+  tags: gnome
+  dconf:
+    key: "/org/gnome/shell/extensions/dash-to-dock/dock-position"
+    value: "'BOTTOM'"
+    state: present
+
+- name: Change dock-fixed to false
+  become_user: "{{ user }}"
+  tags: gnome
+  dconf:
+    key: "/org/gnome/shell/extensions/dash-to-dock/dock-fixed"
+    value: false
+    state: present
+
+- name: Change dock extend-height to false
+  become_user: "{{ user }}"
+  tags: gnome
+  dconf:
+    key: "/org/gnome/shell/extensions/dash-to-dock/extend-height"
+    value: false
+    state: present
+
+- name: Enable gnome shell extensions
+  become_user: "{{ user }}"
+  tags: gnome
+  dconf:
+    key: "/org/gnome/shell/enabled-extensions"
+    value: ['ding@rastersoft.com', 'ubuntu-dock@ubuntu.com', 'tiling-assistant@ubuntu.com']
+    state: present
+
+- name: Select power-profile performance
+  become_user: "{{ user }}"
+  tags: gnome
+  dconf:
+    key: "/org/gnome/shell/last-selected-power-profile"
+    value: "'performance'"
+    state: present
+
+- name: Set favorite-apps
+  become_user: "{{ user }}"
+  tags: gnome
+  dconf:
+    key: "/org/gnome/shell/favorite-apps"
+    value: ['firefox_firefox.desktop', 'org.gnome.Nautilus.desktop', 'terminator.desktop']
+    state: present

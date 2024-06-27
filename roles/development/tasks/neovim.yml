@@ -1,0 +1,40 @@
+- name: Check with neovim is already install
+  become: true
+  tags: neovim
+  ansible.builtin.stat:
+    path: /usr/local/bin/nvim
+  register: neovim
+
+- name: Clone neovim repository
+  become: true
+  tags: neovim
+  ansible.builtin.git:
+    repo: https://github.com/neovim/neovim.git
+    dest: /home/neftales/dev/neovim
+    version: stable
+    single_branch: true
+  when: neovim.stat.executable is not defined
+
+- name: Configure build type for release
+  become: true
+  tags: neovim
+  make:
+    chdir: /home/neftales/dev/neovim
+    params:
+      CMAKE_BUILD_TYPE: Release
+  when: neovim.stat.executable is not defined
+
+- name: Install neovim
+  become: true
+  tags: neovim
+  make:
+    chdir: /home/neftales/dev/neovim
+    target: install
+  when: neovim.stat.executable is not defined
+
+- name: Create a simbolic link from dotfiles to neovim
+  become_user: "{{ user }}"
+  tags: neovim
+  ansible.builtin.shell:
+    cmd: "stow -t $HOME -d $HOME/dev/dotfiles neovim" 
+

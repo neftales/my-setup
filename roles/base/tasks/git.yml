@@ -1,0 +1,11 @@
+- name: Check gitconfig simbolic link exists
+  become_user: "{{ user }}"
+  ansible.builtin.stat:
+    path: $HOME/.gitconfig
+  register: sym
+
+- name: Create a simbolic link from dotfiles to git
+  become_user: "{{ user }}"
+  ansible.builtin.shell:
+    cmd: "stow -t $HOME -d $HOME/dev/dotfiles git"
+  when: sym.stat.islnk is not defined 

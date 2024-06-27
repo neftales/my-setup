@@ -1,0 +1,23 @@
+- name: install packages
+  tags: packages
+  become: true
+  apt:
+    name: 
+      - git
+      - zsh
+      - curl
+      - vim
+      - ninja-build
+      - gettext
+      - cmake
+      - unzip
+      - build-essential
+      - stow
+      - silversearcher-ag
+      - fd-find
+      - python3-psutil
+      - xclip
+      - terminator
+      - ripgrep
+    state: latest
+  when: ansible_distribution == "Ubuntu"
