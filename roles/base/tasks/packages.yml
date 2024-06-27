@@ -1,5 +1,6 @@
 - name: install packages
   tags: packages
+  become: true
   apt:
     name: 
       - git

@@ -1,11 +1,11 @@
 - name: Ensure fonts directory exists
-  become: false
+  become_user: "{{ user }}"
   file:
     path: $HOME/.fonts
     state: directory
 
 - name: Download FiraCode fonts and extract in ~./fonts
-  become: false
+  become_user: "{{ user }}"
   ansible.builtin.unarchive:
     src: https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/FiraCode.zip
     dest: $HOME/.fonts
@@ -13,6 +13,6 @@
     remote_src: yes
 
 - name: Font cache
-  become_user: neftales
+  become_user: "{{ user }}"
   ansible.builtin.shell:
     cmd: "fc-cache -fv"

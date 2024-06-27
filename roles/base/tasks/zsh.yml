@@ -1,43 +1,46 @@
 - name: Check if oh-my-zsh directory exists
+  become_user: "{{ user }}"
   ansible.builtin.stat:
-    path: /home/neftales/.oh-my-zsh/
+    path: $HOME/.oh-my-zsh/
   register: ohmyzsh
 
 - name: Check zsh simbolic link exists
+  become_user: "{{ user }}"
   ansible.builtin.stat:
-    path: /home/neftales/.zshrc
+    path: $HOME/.zshrc
   register: sym
 
 - name: Check zsh spaceship theme simbolic link exists
+  become_user: "{{ user }}"
   ansible.builtin.stat:
-    path: /home/neftales/.oh-my-zsh/themes/spaceship.zsh-theme
+    path: $HOME/.oh-my-zsh/themes/spaceship.zsh-theme
   register: theme_sym
 
 - name: Install oh-my-zsh
-  become_user: neftales
-  ansible.builtin.shell: 
+  become_user: "{{ user }}"
+  ansible.builtin.shell:
     cmd: "curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh | bash"
   when: ohmyzsh.stat.isdir is not defined 
 
 - name: Install spaceship theme
-  become_user: neftales
-  ansible.builtin.git: 
+  become_user: "{{ user }}"
+  ansible.builtin.git:
     repo: https://github.com/spaceship-prompt/spaceship-prompt.git
     dest: /home/neftales/.oh-my-zsh/themes/spaceship-prompt/
     depth: 1
 
 - name: Create a simbolic link to zsh theme
-  become_user: neftales
-  ansible.builtin.file: 
+  become_user: "{{ user }}"
+  ansible.builtin.file:
     src: /home/neftales/.oh-my-zsh/themes/spaceship-prompt/spaceship.zsh-theme
     dest: /home/neftales/.oh-my-zsh/themes/spaceship.zsh-theme
-    owner: neftales
-    group: neftales
+    owner: "{{ user }}"
+    group: "{{ user }}"
     state: link
-  when: theme_sym.stat.islnk is not defined 
+  when: theme_sym.stat.islnk is not defined
 
 - name: Create a simbolic link from dotfiles to zsh
-  become_user: neftales
+  become_user: "{{ user }}"
   ansible.builtin.shell: 
     cmd: "stow -t $HOME -d $HOME/dev/dotfiles zsh" 
   when: sym.stat.islnk is not defined 
