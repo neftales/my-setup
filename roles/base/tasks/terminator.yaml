@@ -1,0 +1,19 @@
+- name: Check terminator symbolic link exists
+  tags: terminator
+  become_user: neftales
+  ansible.builtin.stat:
+    path: $HOME/.config/terminator/config
+  register: sym
+
+- name: Remove terminator config if is not a symbolic link
+  tags: terminator
+  become_user: neftales
+  ansible.builtin.file:
+    path: $HOME/.config/terminator/config
+    state: absent
+
+- name: Create a symbolic link from dotfiles to terminator
+  tags: terminator
+  become_user: neftales
+  ansible.builtin.shell: 
+    cmd: "stow -t $HOME -d $HOME/dev/dotfiles terminator"
