@@ -45,9 +45,17 @@
     state: link
   when: theme_sym.stat.islnk is not defined
 
+- name: Delete default .zshrc file
+  become_user: "{{ user }}"
+  tags: zsh
+  ansible.builtin.file:
+    paty: $HOME/.zshrc
+    state: absent
+  when: sym.stat.islnk is not defined
+
 - name: Create a simbolic link from dotfiles to zsh
   become_user: "{{ user }}"
   tags: zsh
   ansible.builtin.shell: 
     cmd: "stow -t $HOME -d $HOME/dev/dotfiles zsh" 
-  when: sym.stat.islnk is not defined 
+  when: sym.stat.islnk is not defined
