@@ -59,3 +59,9 @@
   ansible.builtin.shell: 
     cmd: "stow -t $HOME -d $HOME/dev/dotfiles zsh" 
   when: sym.stat.islnk is not defined
+
+- name: Change zsh to default shell
+  become_user: "{{ user }}"
+  tags: zsh
+  ansible.builtin.shell:
+    cmd: "chsh -s $(which zsh)"
