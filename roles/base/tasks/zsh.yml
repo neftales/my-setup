@@ -57,7 +57,7 @@
   tags: zsh
   ansible.builtin.shell: 
     cmd: "stow -t $HOME -d $HOME/dev/dotfiles zsh"
-  when: sym.stat.islnk is not defined
+  when: sym.stat.islnk is defined and sym.stat.islnk == false
 
 - name: Change zsh to default shell
   become: true
