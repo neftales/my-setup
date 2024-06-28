@@ -8,20 +8,17 @@ ssh-keygen -t ed25519 -C neftales@gmail.com
 ssh-add "$(ssh-agent -s)"
 cat ~/.ssh/id_ed25519.pub
 ```
-
-Clone this repo and run the base playbook
+Run the script that install ansible e run the base playbook.
 ```bash
-git clone git@github.com:neftales/my-setup.git ~/dev/my-setup/
-cd ~/dev/my-setup/
-chmod +x ./install.sh
-./install.sh
+wget -O - https://raw.githubusercontent.com/neftales/my-setup/auto-install/install.sh | bash
 ```
 
 After this point log out and log in for the changes to take effect.
 
 Open terminator and wait to install Zsh plugins, after run the followers command in root of this repo:
 ```bash
-ansible-playbook --ask-become-pass workstation.yaml
+ansible-pull -U https://github.com/neftales/my-setup.git -C auto-install -K
+
 ```
 
 Now just wait the process of installation.
