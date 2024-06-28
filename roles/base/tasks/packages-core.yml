@@ -6,7 +6,6 @@
       - git
       - zsh
       - curl
-      - vim
       - ninja-build
       - gettext
       - cmake
@@ -19,6 +18,13 @@
       - xclip
       - terminator
       - ripgrep
-      - virtualbox
     state: latest
   when: ansible_distribution == "Ubuntu"
+
+- name: Install asdf
+  become_user: "{{ user }}"
+  tags: asdf
+  ansible.builtin.git:
+    repo: https://github.com/asdf-vm/asdf.git
+    dest: $HOME/.asdf
+    version: v0.14.0 

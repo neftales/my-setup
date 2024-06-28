@@ -20,9 +20,7 @@
         upgrade: yes
       when: ansible_distribution == "Ubuntu"
 
-    - name: Install Ansible community.general
-      become_user: "{{ user }}"
-      ansible.builtin.shell:
-        cmd: "ansible-galaxy collection install community.general"
   roles:
-    - base
+    - appearance
+    - development
+    - virtualization

@@ -5,13 +5,6 @@
     path: $HOME/.oh-my-zsh/
   register: ohmyzsh
 
-- name: Check zsh simbolic link exists
-  become_user: "{{ user }}"
-  tags: zsh
-  ansible.builtin.stat:
-    path: $HOME/.zshrc
-  register: sym
-
 - name: Check zsh spaceship theme simbolic link exists
   become_user: "{{ user }}"
   tags: zsh
@@ -45,9 +38,29 @@
     state: link
   when: theme_sym.stat.islnk is not defined
 
+- name: Check zsh simbolic link exists
+  become_user: "{{ user }}"
+  tags: zsh
+  ansible.builtin.stat:
+    path: $HOME/.zshrc
+  register: sym
+
+- name: Delete default .zshrc file
+  become_user: "{{ user }}"
+  tags: zsh
+  ansible.builtin.file:
+    path: $HOME/.zshrc
+    state: absent
+  when: sym.stat.islnk is defined and sym.stat.islnk == False
+
 - name: Create a simbolic link from dotfiles to zsh
   become_user: "{{ user }}"
   tags: zsh
   ansible.builtin.shell: 
-    cmd: "stow -t $HOME -d $HOME/dev/dotfiles zsh" 
-  when: sym.stat.islnk is not defined 
+    cmd: "stow -t $HOME -d $HOME/dev/dotfiles zsh"
+
+- name: Change zsh to default shell
+  become: true
+  tags: zsh
+  ansible.builtin.shell:
+    cmd: "chsh -s /bin/zsh {{ user }}"
