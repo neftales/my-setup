@@ -54,14 +54,6 @@
     value: ['ding@rastersoft.com', 'ubuntu-dock@ubuntu.com', 'tiling-assistant@ubuntu.com']
     state: present
 
-- name: Select power-profile performance
-  become_user: "{{ user }}"
-  tags: gnome
-  dconf:
-    key: "/org/gnome/shell/last-selected-power-profile"
-    value: "'performance'"
-    state: present
-
 - name: Set favorite-apps
   become_user: "{{ user }}"
   tags: gnome
