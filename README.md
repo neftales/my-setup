@@ -13,14 +13,14 @@ cat ~/.ssh/id_ed25519.pub
 
 Run the script that install Ansible and run the base playbook.
 ```bash
-wget -O - https://raw.githubusercontent.com/neftales/my-setup/auto-install/install.sh | bash
+wget -O - https://raw.githubusercontent.com/neftales/my-setup/main/install.sh | bash
 ```
 
 After this point log out and log in for the changes to take effect.
 
 Open terminator and wait to install Zsh plugins, after run the follower command:
 ```bash
-ansible-pull -U https://github.com/neftales/my-setup.git workstation.yaml -C auto-install -K
+ansible-pull -U https://github.com/neftales/my-setup.git workstation.yaml -K
 
 ```
 
