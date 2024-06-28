@@ -4,5 +4,11 @@
   apt:
     name: 
       - virtualbox
+      - qemu-kvm 
+      - libvirt-daemon
+      - libvirt-clients
+      - bridge-utils
+      - virtinst
+      - cpu-checker
     state: latest
   when: ansible_distribution == "Ubuntu"
