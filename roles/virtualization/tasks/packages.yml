@@ -1,0 +1,8 @@
+- name: install packages
+  tags: packages
+  become: true
+  apt:
+    name: 
+      - virtualbox
+    state: latest
+  when: ansible_distribution == "Ubuntu"

@@ -6,7 +6,6 @@
       - git
       - zsh
       - curl
-      - vim
       - ninja-build
       - gettext
       - cmake
@@ -19,6 +18,5 @@
       - xclip
       - terminator
       - ripgrep
-      - virtualbox
     state: latest
   when: ansible_distribution == "Ubuntu"

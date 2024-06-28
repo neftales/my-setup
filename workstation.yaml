@@ -7,22 +7,17 @@
     - name: Update Cache (Ubuntu)
       tags: always
       become: true
-      ansible.builtin.apt:
+      apt:
         update_cache: yes
-        cache_valid_time: 3600
       changed_when: false
       when: ansible_distribution == "Ubuntu"
 
     - name: Install Updates (Ubuntu)
       tags: always
       become: true
-      ansible.builtin.apt:
-        upgrade: yes
+      apt:
+        upgrade: dist
+        update_cache: yes
       when: ansible_distribution == "Ubuntu"
-
-    - name: Install Ansible community.general
-      become_user: "{{ user }}"
-      ansible.builtin.shell:
-        cmd: "ansible-galaxy collection install community.general"
   roles:
-    - base
+    - appearance
