@@ -1,7 +1,7 @@
 - name: install packages
   tags: packages
   become: true
-  apt:
+  ansible.builtin.apt:
     name:
       - git
       - zsh
@@ -31,3 +31,14 @@
     repo: https://github.com/asdf-vm/asdf.git
     dest: $HOME/.asdf
     version: v0.14.0
+
+- name: Get Obsidian package
+  become_user: "{{ user }}"
+  ansible.builtin.get_url:
+    url: "https://github.com/obsidianmd/obsidian-releases/releases/download/v{{ version.obsidian }}/obsidian-{{ version.obsidian }}-amd64.deb"
+    dest: $HOME/obsidian.deb
+
+- name: Install Obsidian
+  become: true
+  ansible.builtin.apt:
+    deb: /home/{{ user }}/obsidian.deb
