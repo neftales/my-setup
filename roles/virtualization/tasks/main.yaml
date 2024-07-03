@@ -1,3 +1,4 @@
 ---
 - import_tasks: packages.yaml
 - import_tasks: vagrant.yaml
+- import_tasks: kvm.yaml
