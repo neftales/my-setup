@@ -51,7 +51,12 @@
   tags: gnome
   dconf:
     key: "/org/gnome/shell/enabled-extensions"
-    value: ['ding@rastersoft.com', 'ubuntu-dock@ubuntu.com', 'tiling-assistant@ubuntu.com']
+    value:
+      [
+        "ding@rastersoft.com",
+        "ubuntu-dock@ubuntu.com",
+        "tiling-assistant@ubuntu.com",
+      ]
     state: present
 
 - name: Set favorite-apps
@@ -59,5 +64,11 @@
   tags: gnome
   dconf:
     key: "/org/gnome/shell/favorite-apps"
-    value: ['firefox_firefox.desktop', 'org.gnome.Nautilus.desktop', 'terminator.desktop']
+    value:
+      [
+        "firefox_firefox.desktop",
+        "org.gnome.Nautilus.desktop",
+        "terminator.desktop",
+        "obsidian.desktop",
+      ]
     state: present
