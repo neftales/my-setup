@@ -36,3 +36,22 @@
   ansible.builtin.shell:
     cmd: "asdf global golang 1.22.4"
 
+- name: Install asdf nodejs plugin
+  become_user: "{{ user }}"
+  tags: asdf
+  ansible.builtin.shell:
+    cmd: "asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git"
+    creates: $HOME/.asdf/plugins/nodejs
+
+- name: Install NodeJS 20.15.0
+  become_user: "{{ user }}"
+  tags: asdf
+  ansible.builtin.shell:
+    cmd: "asdf install nodejs 20.15.0"
+
+- name: Configure Node 20.15.0
+  become_user: "{{ user }}"
+  tags: asdf
+  ansible.builtin.shell:
+    cmd: "asdf global nodejs 20.15.0"
+
