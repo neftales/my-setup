@@ -21,6 +21,7 @@
       - btop
       - jq
       - nmap
+      - tmux
     state: latest
   when: ansible_distribution == "Ubuntu"
 

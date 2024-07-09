@@ -2,7 +2,7 @@
   tags: packages
   become: true
   apt:
-    name: 
+    name:
       - virtualbox
       - qemu-kvm
       - libvirt-daemon
@@ -11,5 +11,6 @@
       - virtinst
       - cpu-checker
       - virt-manager
+      - libguestfs-tools
     state: latest
   when: ansible_distribution == "Ubuntu"
