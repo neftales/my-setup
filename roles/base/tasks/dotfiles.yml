@@ -4,3 +4,6 @@
     key_file: $HOME/.ssh/id_ed25519
     repo: https://github.com/neftales/dotfiles.git
     dest: /home/neftales/dev/dotfiles
+    version: "main"
+    clone: yes
+    update: yes
