@@ -2,3 +2,4 @@
 - import_tasks: neovim.yml
 - import_tasks: asdf.yml
 - import_tasks: docker.yaml
+- import_tasks: dbeaver.yaml
